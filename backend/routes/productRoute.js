@@ -8,7 +8,7 @@ router.route("/products").get(getAllProducts)
 
 router.route("/product/:id").get(getProductDetails)
 
-router.route("/product/new").post(isAuthenticatedUser,authorizeRoles("admin"),createProduct)
+router.route("/admin/product/new").post(isAuthenticatedUser,authorizeRoles("admin"),createProduct)
 
 router.route("/product/:id").put(isAuthenticatedUser,authorizeRoles("admin"),updateProduct)
 
