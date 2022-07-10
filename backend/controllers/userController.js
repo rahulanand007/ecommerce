@@ -49,7 +49,7 @@ exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
 
 
 
-//Get all users
+//Get all users (admin)
 exports.getAllUsers = catchAsyncErrors(async(req,res,next)=>{
     const users = await User.find()
 
@@ -59,6 +59,23 @@ exports.getAllUsers = catchAsyncErrors(async(req,res,next)=>{
     })
 }
 )
+
+
+//Get single user (admin)
+exports.getSingleUser = catchAsyncErrors(async(req,res,next)=>{
+    const user = await User.findById(req.params.id)
+
+    if(!user){
+        return next(new ErrorHandler(`User doesn't exist with Id: ${req.params.id}`,404))
+    }
+
+    res.status(201).json({
+        success: true,
+        user
+    })
+}
+)
+
 
 
 //Logout User
@@ -147,8 +164,6 @@ exports.updatePassword = catchAsyncErrors(async (req,res,next)=>{
     await user.save();
 
     sendToken(user,200,res)
-
-
 })
 
 //update user profile
@@ -173,7 +188,50 @@ exports.updateProfile = catchAsyncErrors(async (req,res,next)=>{
         success:true,
         user
     })
-
-
 })
 
+//update user role (admin)
+exports.updateUserRole = catchAsyncErrors(async (req,res,next)=>{
+   
+    const newUserData = {
+        name:req.body.name,
+        email:req.body.email,
+        role: req.body.role
+    }
+
+    const user = await User.findByIdAndUpdate(req.params.id,newUserData,{
+        new: true,
+        runValidators:true,
+        useFindAndModify:false,
+    })
+    if(!user){
+        return next(new ErrorHandler("User Not Found",404))
+    }
+
+
+    res.status(200).json({
+        success:true,
+        user
+    })
+})
+
+
+//Delete user (admin)
+exports.deleteUser = catchAsyncErrors(async (req,res,next)=>{
+   
+
+    const user = await User.findById(req.params.id)
+
+    if(!user){
+        return next(new ErrorHandler("User Not Found",404))
+    }
+     
+    await user.remove()
+    //Will delete cloudinary(Avatar) later
+
+
+    res.status(200).json({
+        success:true,
+        message:"user deleted successfully"
+    })
+})
