@@ -9,19 +9,19 @@ import {useSelector, useDispatch} from "react-redux"
 
 
 
-const product = {
-    name:"Blue Tshirt",
-    images: [{url: "https://i.ibb.co/DRST11n/1.webp"}],
-    price: "Rs3000",
-    _id: "Rahul"
-}
+// const product = {
+//     name:"Blue Tshirt",
+//     images: [{url: "https://i.ibb.co/DRST11n/1.webp"}],
+//     price: "Rs3000",
+//     _id: "Rahul"
+// }
 
 const Home = () => {
   
   const dispatch = useDispatch()
+  const {loading,error, products,productCount}= useSelector(state=> state.products)
 
   useEffect(() => {
-   
     dispatch(getProduct())
   }, [dispatch])
   
@@ -45,14 +45,9 @@ const Home = () => {
           <h2 className="homeHeading">Featured Products</h2>
 
           <div className="container" id="container">
-            <ProductCard product = {product}/>
-            <ProductCard product = {product}/>
-            <ProductCard product = {product}/>
-            <ProductCard product = {product}/>
-            <ProductCard product = {product}/>
-            <ProductCard product = {product}/>
-            <ProductCard product = {product}/>
-            <ProductCard product = {product}/>
+            {products && products.map(product=>(
+              <ProductCard product={product}/>
+            ))}
           </div>
         </Fragment>
   );
