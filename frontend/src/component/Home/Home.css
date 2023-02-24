@@ -3,7 +3,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vmin;
+    height: 89vmin;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -115,6 +115,40 @@
     box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
   
     transform: translateY(-1vmax);
+  }
+
+  .cartImage{
+    height: 2.5vmax;
+    text-align: end;
+    margin-right: 0.5vmax;
+    margin-bottom: -8vmax;
+  }
+  .cart_image{
+    padding: 0.2vmax;
+    height: 2.5vmax;
+  }
+  .cart_image:hover{
+    box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
+  
+    transform: translateY(-0.5vmax);
+  }
+
+
+  .profileImage{
+    height: 2.5vmax;
+    text-align: end;
+    margin-top: 1vmax;
+    margin-right: 2vmax;
+    margin-bottom: -8vmax;
+  }
+  .profile_image{
+    padding: 0.2vmax;
+    height: 3.5vmax;
+  }
+  .profile_image:hover{
+    box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
+  
+    transform: translateY(-0.5vmax);
   }
   
   @media screen and (max-width: 600px) {
